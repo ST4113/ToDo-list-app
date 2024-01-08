@@ -1,4 +1,4 @@
-package com.example.myapplication1;// MainActivity.java
+package com.example.myapplication1;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -42,14 +42,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Handle task click to toggle its status
         listViewTasks.setOnItemClickListener((parent, view, position, id) -> {
             Task task = tasks.get(position);
             task.setDone(!task.isDone());
             adapter.notifyDataSetChanged();
         });
 
-        // Handle task long click for editing or deleting
         listViewTasks.setOnItemLongClickListener((parent, view, position, id) -> {
             editOrDeleteTask(position);
             return true;
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Inside the editOrDeleteTask method in MainActivity.java
 
     private void editOrDeleteTask(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -88,25 +85,20 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Edit Task");
 
-        // Create an EditText and set the current task description as its text
         final EditText editText = new EditText(this);
         editText.setText(tasks.get(position).getDescription());
         builder.setView(editText);
 
         builder.setPositiveButton("Save", (dialog, which) -> {
-            // Update the task description with the new text
             String newDescription = editText.getText().toString().trim();
             tasks.get(position).setDescription(newDescription);
             adapter.notifyDataSetChanged();
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> {
-            // Do nothing if the user cancels the edit
         });
 
         builder.create().show();
-        // Implement task editing logic here
-        // For simplicity, you can use an EditText in an AlertDialog to edit the task description
     }
 
     private void deleteTask(final int position) {
